@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BestellApp - Burger Paradies</title>
+    <link rel="icon" href="./assets/favicon/apple-touch-icon.png" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <script src="./script/db.js"></script>
+    <script src="./script/template.js"></script>
+    <script src="./script/script.js"></script>
+  </head>
+
+  <body onload="renderMain(), renderSide(), renderDrinks()">
+    <header class="header">
+      <img alt="BestellApp Logo" src="./assets/logo/Logo.png" />
+    </header>
+
+    <div class="content-wrapper">
+      <div class="main-wrapper">
+        <div class="banner"></div>
+
+        <main>
+          <div class="restaurant-info">
+            <h1>Burger Paradies</h1>
+            <a>Bewertung (4.2 von 5 Sternen)</a>
+          </div>
+
+          <nav class="category-nav">
+            <a class="nav-btn" href="#main"><b>Hauptgerichte</b></a>
+            <a class="nav-btn" href="#side"><b>Beilagen</b></a>
+            <a class="nav-btn" href="#drinks"><b>Getränke</b></a>
+          </nav>
+
+          <section id="main" class="main-menu">
+            <div class="main-dish-header"></div>
+            <h2>Hauptgerichte</h2>
+            <div id="main-dishes"></div>
+          </section>
+
+          <section id="side" class="side-menu">
+            <div class="side-dish-header"></div>
+            <h2>Beilagen</h2>
+            <div id="side-dishes"></div>
+          </section>
+
+          <section id="drinks" class="dinks-menu">
+            <div class="drinks-header"></div>
+            <h2>Getränke</h2>
+            <div id="all-drinks"></div>
+          </section>
+        </main>
+      </div>
+
+      <div class="basket-wrapper">
+        <div class="sticky">
+          <h2 class="basket-header">Warenkorb</h2>
+          <div id="basket" class="basket">
+            <p class="basket-disclaimer">Dein Warenkorb ist momentan leer.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
