@@ -1,9 +1,6 @@
 let dishesInBasket = [];
 let itemCounter = [];
 let itemSubtotal = [];
-let itemsInBasket = [];
-let minimumOrderValue = 20;
-let basketSubTotal;
 let basketTotal = 0;
 
 
@@ -58,7 +55,6 @@ function renderDrinks() {
 
 
 function renderBasket() {
-    let total = dishesInBasket.reduce((sum, item) => sum + item.total, 0);
     let basket = document.getElementById('basket');
     basket.innerHTML = ``;
     
@@ -71,6 +67,7 @@ function renderBasket() {
         for (let i = 0; i < dishesInBasket.length; i++) {
         basket.innerHTML += getBasketTemplate(i);
     }};
+    calcBasketTotal()
 }
 
 
@@ -81,23 +78,21 @@ function addToBasket(i, j) {
     let itemAmount = 1;
     let itemTotal = itemPrice * itemAmount;
 
-    let itemAlreadyExistsInBasket = false;
-    let indexOfExistingItemInBasket = -1;
+    let itemAlreadyInBasket = false;
+    let indexOfItemInBasket = -1;
 
     for (let j = 0; j < dishesInBasket.length; j++) {
         if (dishesInBasket[j].name === itemName) {
-            itemAlreadyExistsInBasket = true;
-            indexOfExistingItemInBasket = j;
+            itemAlreadyInBasket = true;
+            indexOfItemInBasket = j;
             break;
         }
     }
 
-    if (itemAlreadyExistsInBasket) {
-        dishesInBasket[indexOfExistingItemInBasket].amount += itemAmount;
-        dishesInBasket[indexOfExistingItemInBasket].total += itemTotal;
-
+    if (itemAlreadyInBasket) {
+        dishesInBasket[indexOfItemInBasket].amount += itemAmount;
+        dishesInBasket[indexOfItemInBasket].total += itemTotal;
     } else {
-
         dishesInBasket.push({
             name: itemName,
             price: itemPrice,
@@ -105,29 +100,34 @@ function addToBasket(i, j) {
             total: itemTotal,
         });
     }
-
     renderBasket();
 }
 
-function subtractMeal(index) {
-    let item = dishesInBasket[index];
+function subtractMeal(i) {
+    let item = dishesInBasket[i];
     if (item.amount > 1) {
         item.amount--;
         item.total = item.amount * item.price;
     } else {
-        deleteFromBasket(index);
+        deleteFromBasket(i);
     }
     renderBasket();
 }
 
-function addMeal(index) {
-    let item = dishesInBasket[index];
+function addMeal(i) {
+    let item = dishesInBasket[i];
     item.amount++;
     item.total = item.amount * item.price;
     renderBasket();
 }
 
-function deleteFromBasket(index) {
-    dishesInBasket.splice(index, 1);
+function deleteFromBasket(i) {
+    dishesInBasket.splice(i, 1);
     renderBasket();
+}
+
+function calcBasketTotal() {
+    basketTotal = dishesInBasket.reduce((sum, item) => sum + item.total, 0).toFixed(2);
+
+    document.getElementById('basket').innerHTML += getBasketTotalTemplate();
 }

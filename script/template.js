@@ -36,17 +36,30 @@ function getBasketTemplate(i) {
     return `
     <div class="basket">
         <div class="basket-meal-wrapper">
-            <h4>${item.name}</h4> <!-- Zugriff auf den Namen des Artikels im Warenkorb -->
+            <h4>${item.name}</h4>
             <div class="basket-meals">
                 <div class="amount-wrapper">
-                  <button onclick="subtractMeal(${i})" id="subtract-meal" class="basket-button">-</button>
-                  <p>${item.amount}x</p> <!-- Zeige die Menge des Artikels -->
-                  <button onclick="addMeal(${i})" id="add-meal" class="basket-button">+</button>
+                  <button onclick="subtractMeal(${i})" id="subtract-meal" class="basket-btn">-</button>
+                  <p>${item.amount}x</p>
+                  <button onclick="addMeal(${i})" id="add-meal" class="basket-btn">+</button>
                 </div>
-                <p class="price">${item.total.toFixed(2)}€</p> <!-- Zeige den Gesamtpreis des Artikels -->
-                <button onclick="deleteFromBasket(${i})" id="delete-meal" class="basket-button">x</button>
+                <p class="price">${item.total.toFixed(2)}€</p>
+                <button onclick="deleteFromBasket(${i})" id="delete-meal" class="basket-btn">x</button>
             </div>
         </div>
+        <div id="basket"></div>
+    </div>
+    `;
+}
+
+function getBasketTotalTemplate() {
+    return `
+    <div id="basket-total">
+        <h4>Gesamt</h4>
+        <p id="total">${basketTotal}€</p>
+    </div>
+    <div class="order">
+        <button class="order-btn">Bestellen</button>
     </div>
     `;
 }
