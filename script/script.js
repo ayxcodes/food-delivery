@@ -61,23 +61,39 @@ function renderBasket() {
     if (dishesInBasket.length === 0) {
         basket.innerHTML = '<p class="basket-disclaimer">Dein Warenkorb ist momentan leer.</p>';
         return;
-
-    } else {
-        
+    } else {  
         for (let i = 0; i < dishesInBasket.length; i++) {
         basket.innerHTML += getBasketTemplate(i);
     }};
     calcBasketTotal()
 }
 
-
 function addToBasket(i, j) {
-    let item = dishes[i].menu[j];
+    let item = getItemFromMenu(i, j);
+    let { itemName, itemPrice, itemAmount, itemTotal } = getItemDetails(item);
+    let { itemAlreadyInBasket, indexOfItemInBasket } = checkItemInBasket(itemName);
+
+    if (itemAlreadyInBasket) {
+        updateBasketItem(indexOfItemInBasket, itemAmount, itemTotal);
+    } else {
+        addItemToBasket(itemName, itemPrice, itemAmount, itemTotal);
+    }
+    renderBasket();
+}
+
+function getItemFromMenu(i, j) {
+    return dishes[i].menu[j];
+}
+
+function getItemDetails(item) {
     let itemName = item.name;
     let itemPrice = item.price;
     let itemAmount = 1;
     let itemTotal = itemPrice * itemAmount;
+    return { itemName, itemPrice, itemAmount, itemTotal };
+}
 
+function checkItemInBasket(itemName) {
     let itemAlreadyInBasket = false;
     let indexOfItemInBasket = -1;
 
@@ -88,19 +104,21 @@ function addToBasket(i, j) {
             break;
         }
     }
+    return { itemAlreadyInBasket, indexOfItemInBasket };
+}
 
-    if (itemAlreadyInBasket) {
-        dishesInBasket[indexOfItemInBasket].amount += itemAmount;
-        dishesInBasket[indexOfItemInBasket].total += itemTotal;
-    } else {
-        dishesInBasket.push({
-            name: itemName,
-            price: itemPrice,
-            amount: itemAmount,
-            total: itemTotal,
-        });
-    }
-    renderBasket();
+function updateBasketItem(index, itemAmount, itemTotal) {
+    dishesInBasket[index].amount += itemAmount;
+    dishesInBasket[index].total += itemTotal;
+}
+
+function addItemToBasket(itemName, itemPrice, itemAmount, itemTotal) {
+    dishesInBasket.push({
+        name: itemName,
+        price: itemPrice,
+        amount: itemAmount,
+        total: itemTotal,
+    });
 }
 
 function subtractMeal(i) {
@@ -128,6 +146,5 @@ function deleteFromBasket(i) {
 
 function calcBasketTotal() {
     basketTotal = dishesInBasket.reduce((sum, item) => sum + item.total, 0).toFixed(2);
-
     document.getElementById('basket').innerHTML += getBasketTotalTemplate();
 }

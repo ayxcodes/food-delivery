@@ -176,11 +176,11 @@ main {
 
 .basket-header {
     padding: 10px;
+    border-bottom: solid 2px rgb(238, 238, 238);
 }
 
 .basket-meal-wrapper {
     padding: 10px;
-    border-top: solid 2px rgb(238, 238, 238);
     border-bottom: solid 2px rgb(238, 238, 238);
 }
 
