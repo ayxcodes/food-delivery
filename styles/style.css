@@ -252,3 +252,38 @@ main {
     border: 2px solid #ffc16b;
     transition: 0.4s;
 }
+
+.d-none {
+    display: none;
+}
+
+.overlay-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-confirm {
+    height: 200px;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background-color: rgb(238, 238, 238);
+    padding: 20px;
+
+}
+
+----- RESPONSIVE -----
+
+Warenkorb bis 800px normal
+<800 bis 320px Warenkorb runter in Dialogform
+Warenkorb als Button zum öffnen
+schließen Button oben in der Ecke

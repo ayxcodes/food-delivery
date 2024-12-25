@@ -59,7 +59,18 @@ function getBasketTotalTemplate() {
         <p id="total">${basketTotal}€</p>
     </div>
     <div class="order">
-        <button class="order-btn">Bestellen</button>
+        <button onclick="orderSent()" class="order-btn">Bestellen</button>
+    </div>
+    `;
+}
+
+function getOverlayTemplate() {
+    return `
+    <div onclick="closeOverlay()" class="overlay-container">
+        <div class="order-confirm">
+            <h1>Bestellung eingegangen!</h1>
+            <p>Wir haben Ihre Bestellung erhalten und werden sie schnellstmöglich zubereiten.</p>
+        </div>
     </div>
     `;
 }

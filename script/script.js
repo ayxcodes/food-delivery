@@ -1,6 +1,4 @@
 let dishesInBasket = [];
-let itemCounter = [];
-let itemSubtotal = [];
 let basketTotal = 0;
 
 
@@ -59,7 +57,7 @@ function renderBasket() {
     basket.innerHTML = ``;
     
     if (dishesInBasket.length === 0) {
-        basket.innerHTML = '<p class="basket-disclaimer">Dein Warenkorb ist momentan leer.</p>';
+        basket.innerHTML = `<p class="basket-disclaimer">Dein Warenkorb ist momentan leer.</p>`;
         return;
     } else {  
         for (let i = 0; i < dishesInBasket.length; i++) {
@@ -148,3 +146,27 @@ function calcBasketTotal() {
     basketTotal = dishesInBasket.reduce((sum, item) => sum + item.total, 0).toFixed(2);
     document.getElementById('basket').innerHTML += getBasketTotalTemplate();
 }
+
+function orderSent() {
+    let overlay = document.getElementById('overlay');
+    overlay.classList.remove('d-none');
+    overlay.innerHTML += getOverlayTemplate();
+    emptyBasket();
+}
+
+function emptyBasket() {
+    while (dishesInBasket.length > 0) {
+        dishesInBasket.pop();
+    }
+    renderBasket();
+}
+
+function closeOverlay() {
+    let overlay = document.getElementById('overlay');
+    overlay.innerHTML = ``;
+    overlay.classList.add('d-none');
+}
+
+function openBasket() {}
+
+function closeBasket() {}
