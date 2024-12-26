@@ -278,12 +278,55 @@ main {
     text-align: center;
     background-color: rgb(238, 238, 238);
     padding: 20px;
-
 }
 
------ RESPONSIVE -----
+@media (max-width: 850px) {
+    .main-wrapper {
+        width: 100%;
+    }
+    
+    .basket-wrapper {
+        position: fixed;
+        width: 200px;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 0;
+        overflow: hidden;
+    }
 
-Warenkorb bis 800px normal
-<800 bis 320px Warenkorb runter in Dialogform
-Warenkorb als Button zum öffnen
-schließen Button oben in der Ecke
+    .basket-wrapper.open {
+        width: 300px;
+        background: white;
+        box-shadow: -5px 0px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .basket-content {
+        display: none;
+        flex-direction: column;
+    }
+
+    .basket-wrapper.open .basket-content {
+        display: flex;
+    }
+
+    .basket-toggle-btn {
+        display: block;
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 1000;
+        background-color: #1A73E8;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .basket-toggle-btn:hover {
+        background-color: #418beb;
+        transition: 0.4s;
+    }
+}

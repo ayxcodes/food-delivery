@@ -167,6 +167,15 @@ function closeOverlay() {
     overlay.classList.add('d-none');
 }
 
-function openBasket() {}
-
-function closeBasket() {}
+function toggleBasket() {
+    const basketWrapper = document.querySelector('.basket-wrapper');
+    const basketToggleBtn = document.querySelector('.basket-toggle-btn');
+    
+    basketWrapper.classList.toggle('open');
+    
+    if (basketWrapper.classList.contains('open')) {
+        basketToggleBtn.textContent = 'X';
+    } else {
+        basketToggleBtn.textContent = 'Warenkorb';
+    }
+}
