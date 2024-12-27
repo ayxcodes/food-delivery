@@ -1,7 +1,6 @@
 let dishesInBasket = [];
 let basketTotal = 0;
 
-
 function render() {
     renderMain();
     renderSide();
@@ -50,7 +49,6 @@ function renderDrinks() {
         }
     }
 }
-
 
 function renderBasket() {
     let basket = document.getElementById('basket');
